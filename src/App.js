@@ -47,16 +47,19 @@ function App() {
   }
 
   function pauseTimer() {
-    setTimeout(() => {
-      if (isWaitClicked === 1) {
-        setButtonText('Continue');
-        setIsPaused(true);
-        setIsActive(false);
-        Notify.warning('You paused timer');
-      } else {
-        setIsWaitClicked(0);
-      }
-    }, 900);
+    let timeForSecondClick = null;
+    timeForSecondClick = setTimeout(() => {
+      setIsWaitClicked(0);
+    }, 300);
+
+    if (isWaitClicked === 1) {
+      setButtonText('Continue');
+      setIsPaused(true);
+      setIsActive(false);
+      Notify.warning('You paused timer');
+      setIsWaitClicked(0);
+      clearTimeout(timeForSecondClick);
+    }
   }
 
   function resetTimer() {
