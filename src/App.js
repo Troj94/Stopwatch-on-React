@@ -11,8 +11,6 @@ function App() {
   const [isWaitClicked, setIsWaitClicked] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  let delay = null;
-
   useEffect(() => {
     let interval = null;
 
@@ -49,15 +47,16 @@ function App() {
   }
 
   function pauseTimer() {
-    delay = setTimeout(() => {}, 300);
-    if (isWaitClicked >= 1) {
-      setButtonText('Continue');
-      setIsPaused(true);
-      setIsActive(false);
-      Notify.warning('You paused timer');
-      setIsWaitClicked(0);
-      clearTimeout(delay);
-    }
+    setTimeout(() => {
+      if (isWaitClicked === 1) {
+        setButtonText('Continue');
+        setIsPaused(true);
+        setIsActive(false);
+        Notify.warning('You paused timer');
+      } else {
+        setIsWaitClicked(0);
+      }
+    }, 900);
   }
 
   function resetTimer() {
